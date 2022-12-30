@@ -6,7 +6,7 @@ public class World : MonoBehaviour {
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject loadScreen;
 
-    public static Vector3 WorldSizeInVoxels = new Vector3(256, 256, 256);
+    public static Vector3 WorldSizeInVoxels = new Vector3(32, 256, 32);
 
     private Vector3 WorldSizeInChunks = new Vector3(
         WorldSizeInVoxels.x / Chunk.ChunkSizeInVoxels.x,

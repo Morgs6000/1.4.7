@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     [SerializeField] private CharacterController characterController;
 
-    private float speed;
+    [SerializeField] private float speed;
     private float walkingSpeed = 4.317f;
     
     private Vector3 velocity;    
@@ -18,6 +18,12 @@ public class Movement : MonoBehaviour {
     
     private float jumpHeight = 1.2522f;
 
+    [SerializeField] private bool running;
+    private float sprintingSpeed = 5.612f;
+
+    private float lastClickTime;
+    private const float DOUBLE_CLICK_TIME = 0.2f;
+
     //private float stepOffset = 1.0f;
 
     private void Start() {
@@ -28,8 +34,8 @@ public class Movement : MonoBehaviour {
         MovementUpdate();
         FallUpdate();
         JumpUpdate();
-
         //StepOffsetUpdate();
+        SprintUpdate();
     }
 
     private void MovementUpdate() {
@@ -58,6 +64,7 @@ public class Movement : MonoBehaviour {
     private void JumpUpdate() {
         if(isGrounded && Input.GetButton("Space")) {
             isGrounded = false;
+            running = false;
 
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * fallSpeed);
         }
@@ -77,4 +84,37 @@ public class Movement : MonoBehaviour {
         }
     }
     */
+
+    private void SprintUpdate() {
+        if(running == false) {
+            speed = walkingSpeed;
+        }
+        if(running == true) {
+            speed = sprintingSpeed;
+        }
+
+        // Pressionar LeftControl corre.
+        if(Input.GetButton("LCtrl")) {
+            running = true;
+        }
+
+        // Pressionar W duas vezes, também faz correr.
+        if(Input.GetKeyDown(KeyCode.W)) {
+            float timeSinceLastClick = Time.time - lastClickTime;
+
+            if(timeSinceLastClick <= DOUBLE_CLICK_TIME) {
+                running = true;
+            }
+            else {
+                running = false;
+            }
+
+            lastClickTime = Time.time;
+        }
+
+        // Soltar W para de corre.
+        if(Input.GetKeyUp(KeyCode.W)) {
+            running = false;
+        }
+    }
 }

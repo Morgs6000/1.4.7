@@ -16,6 +16,7 @@ public class Highlight : MonoBehaviour {
     private List<int> triangles = new List<int>();
     private int vertexIndex;
     
+    private List<Vector2> uv = new List<Vector2>();
     [SerializeField] private Material material;
 
     [SerializeField] private Transform cam;
@@ -68,6 +69,7 @@ public class Highlight : MonoBehaviour {
     private void MeshRenderer() {
         highlighMesh.vertices = vertices.ToArray();
         highlighMesh.triangles = triangles.ToArray();
+        highlighMesh.uv = uv.ToArray();
 
         highlighMesh.RecalculateNormals();
         highlighMesh.Optimize();
@@ -123,6 +125,8 @@ public class Highlight : MonoBehaviour {
         }
 
         TrianglesAdd();
+
+        UVCoordinate(side);
     }
 
     private void TrianglesAdd() {
@@ -137,5 +141,37 @@ public class Highlight : MonoBehaviour {
         triangles.Add(3 + vertexIndex);
 
         vertexIndex += 4;
+    }
+
+    private void UVAdd(Vector2 textureCoordinate) {
+        Vector2 offset = new Vector2(
+            0, 
+            0
+        );
+
+        Vector2 textureSizeInTiles = new Vector2(
+            1 + offset.x,
+            1 + offset.y
+        );
+        
+        float x = textureCoordinate.x + offset.x;
+        float y = textureCoordinate.y + offset.y;
+
+        float _x = 1.0f / textureSizeInTiles.x;
+        float _y = 1.0f / textureSizeInTiles.y;
+
+        y = (textureSizeInTiles.y - 1) - y;
+
+        x *= _x;
+        y *= _y;
+
+        uv.Add(new Vector2(x, y));
+        uv.Add(new Vector2(x, y + _y));
+        uv.Add(new Vector2(x + _x, y + _y));
+        uv.Add(new Vector2(x + _x, y));
+    }
+
+    private void UVCoordinate(HighlighSide side) {
+        UVAdd(new Vector2(0, 0));
     }
 }
