@@ -5,6 +5,10 @@ using UnityEngine;
 public class Chunk : MonoBehaviour {
     private Mesh voxelMesh;
 
+    private MeshCollider meshCollider;
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
+
     private List<Vector3> vertices = new List<Vector3>();
     private enum VoxelSide { RIGHT, LEFT, TOP, BOTTOM, FRONT, BACK }
 
@@ -12,6 +16,7 @@ public class Chunk : MonoBehaviour {
     private int vertexIndex;
 
     private List<Vector2> uv = new List<Vector2>();
+    [SerializeField] private Material material;
 
     public static Vector3 ChunkSizeInVoxels = new Vector3(16, 256, 16);
 
@@ -22,9 +27,17 @@ public class Chunk : MonoBehaviour {
     private static List<Chunk> chunkData = new List<Chunk>();
     
     private void Start() {
+        meshCollider = GetComponent<MeshCollider>();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+
         chunkData.Add(this);
 
         ChunkVoxelMap();
+
+        Color color;
+        ColorUtility.TryParseHtmlString("#79C05A", out color);
+        meshRenderer.material.color = color;
     }
 
     private void Update() {
@@ -234,8 +247,9 @@ public class Chunk : MonoBehaviour {
         voxelMesh.RecalculateNormals();
         voxelMesh.Optimize();
 
-        GetComponent<MeshCollider>().sharedMesh = voxelMesh;
-        GetComponent<MeshFilter>().mesh = voxelMesh;
+        meshCollider.sharedMesh = voxelMesh;
+        meshFilter.mesh = voxelMesh;
+        meshRenderer.material = material;
     }
 
     private void VoxelGen(Vector3 offset) {

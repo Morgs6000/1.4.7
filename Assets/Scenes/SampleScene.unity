@@ -2086,7 +2086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34901962, g: 0.68235296, b: 0.1882353, a: 1}
+  m_Color: {r: 0.28235295, g: 0.70980394, b: 0.09411765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4305,7 +4305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868832238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 256, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1097219422}
@@ -4350,7 +4350,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   toolbar: {fileID: 719060920}
-  currentTime: 0.25
+  currentTime: 0
 --- !u!1 &869753451
 GameObject:
   m_ObjectHideFlags: 0

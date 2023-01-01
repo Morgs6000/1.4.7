@@ -82,6 +82,9 @@ public class HealthBar : MonoBehaviour {
                     tempoDecorrido = 0;
                 }
             }
+            else {
+                tempoDecorrido = 0;
+            }
         }
     }
 
@@ -95,6 +98,9 @@ public class HealthBar : MonoBehaviour {
                 // Se o tempo decorrido for maior ou igual a 4 segundos, chama o método GanharVida() e reseta o contador
                 if (tempoDecorrido >= 4.0f) {
                     currentHealth--;
+                    tempoDecorrido = 0;
+                }
+                else {
                     tempoDecorrido = 0;
                 }
             }

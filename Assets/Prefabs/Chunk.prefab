@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696ec898259f6e342a1ed3212a01a06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: b59147d4d3117bb459b0a7cda8dedd47, type: 2}
+  material1: {fileID: 2100000, guid: 9755e6d3e6b79b249b05a3347d306202, type: 2}
+  material2: {fileID: 2100000, guid: 43d13411090fdc141b5f2b1530af97ac, type: 2}
 --- !u!64 &6499844163692290285
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -87,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b59147d4d3117bb459b0a7cda8dedd47, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

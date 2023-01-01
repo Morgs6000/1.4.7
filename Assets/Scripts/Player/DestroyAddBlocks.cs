@@ -11,7 +11,7 @@ public class DestroyAddBlocks : MonoBehaviour {
 
     [SerializeField] private Toolbar toolbar;
 
-    [SerializeField] private float currentTime = 0.25f;
+    [SerializeField] private float currentTime;
     
     private void Start() {
         
@@ -20,7 +20,6 @@ public class DestroyAddBlocks : MonoBehaviour {
     private void Update() {
         DestroyBlocks();
         AddBlocks();
-        //StartCoroutine(AddBlocks());
     }
 
     private void DestroyBlocks() {
@@ -78,42 +77,4 @@ public class DestroyAddBlocks : MonoBehaviour {
             currentTime = 0.25f;
         }
     }
-
-    /*
-    private IEnumerator AddBlocks() {
-        while(Input.GetMouseButton(1)) {
-            RaycastHit hit;
-
-            if(Physics.Raycast(cam.position, cam.forward, out hit, rangeHit, groundMask)) {
-                Vector3 pointPos = hit.point + hit.normal / 2;
-
-                bool isValidPosition = 
-                    Vector3.Distance(player.position, pointPos) > 0.81f &&
-                    Vector3.Distance(cam.position, pointPos) > 0.81f;
-
-                if(player.position.y - 1 > Chunk.ChunkSizeInVoxels.y) {
-                    yield break;
-                }
-                else if(isValidPosition) {
-                    Chunk c = Chunk.GetChunk(new Vector3(
-                        Mathf.FloorToInt(pointPos.x),
-                        Mathf.FloorToInt(pointPos.y),
-                        Mathf.FloorToInt(pointPos.z)
-                    ));
-
-                    c.SetBlock(pointPos, toolbar.GetCurrentItem());
-                }                
-            }
-            
-            //yield return new WaitForSeconds(0.25f);
-
-            float delay = 0.25f;
-            float elapsedTime = 0f;
-            while (elapsedTime < delay) {
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-        }
-    }
-    */
 }
