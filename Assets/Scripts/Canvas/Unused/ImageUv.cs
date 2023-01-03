@@ -24,8 +24,8 @@ public class ImageUv : MonoBehaviour {
 
     private void CreateSpriteFromTopLeftTile(Vector2 textureCoordinate) {
         Vector2 textureSizeInPixels = new Vector2(
-            256,
-            256
+            atlas.width,
+            atlas.height
         );
         
         Vector2 textureSizeInTiles = new Vector2(
@@ -36,8 +36,10 @@ public class ImageUv : MonoBehaviour {
         float x = textureCoordinate.x;
         float y = textureCoordinate.y;
 
-        float _x = /*1.0f / */textureSizeInTiles.x;
-        float _y = /*1.0f / */textureSizeInTiles.y;
+        //float _x = 1.0f / textureSizeInTiles.x;
+        //float _y = 1.0f / textureSizeInTiles.y;
+        float _x = textureSizeInPixels.x / textureSizeInTiles.x;
+        float _y = textureSizeInPixels.y / textureSizeInTiles.y;
 
         y = (textureSizeInTiles.y - 1) - y;
 
@@ -49,7 +51,9 @@ public class ImageUv : MonoBehaviour {
             textureSizeInPixels.y / textureSizeInTiles.y
         );
 
+        Rect rect = new Rect(x, y, TilesSize.x, TilesSize.y);
+        
         // Crie uma nova Sprite a partir da nova textura
-        sprite = Sprite.Create(atlas, new Rect(x, y, TilesSize.x, TilesSize.y), Vector2.zero);
+        sprite = Sprite.Create(atlas, rect, Vector2.zero);
     }
 }

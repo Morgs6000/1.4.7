@@ -10,7 +10,6 @@ public class HealthBar : MonoBehaviour {
     // Variável para armazenar o número de pontos de vida atuais do jogador
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private int currentHealth;
-    //[SerializeField] private float decimalHealth;
 
     // Lista de sprites para representar os diferentes estados de cada coração
     [SerializeField] private Sprite[] sprites;
@@ -22,7 +21,6 @@ public class HealthBar : MonoBehaviour {
 
     private void Start() {
         currentHealth = maxHealth;
-        //decimalHealth = currentHealth;
     }
 
     private void Update() {

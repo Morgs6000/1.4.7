@@ -23,8 +23,8 @@ public class DebugScreen : MonoBehaviour {
     private void Update() {
         FrameRate();
 
-        TestLeft();
-        TestRight();
+        TextLeft();
+        TextRight();
     }
 
     private void FrameRate() {
@@ -37,10 +37,52 @@ public class DebugScreen : MonoBehaviour {
         }
     }
 
-    private void TestLeft() {
+    private void TextLeft() {
+        
+
+        debugTextLeft = (
+            "Minecraft Clone 1.4.7 (" + frameRate + " fps, " + "0" + " chunk updates)" + "\n" +
+            "C: 0/0. F: 0, O: 0. E: 0" + "\n" +
+            "E: 0/0. B: 0, I: 0" + "\n" +
+            "P: 0. T: All: 0" + "\n" +
+            "MultiplayerChunkChache: 0"
+        );
+
+        debugTextLeft += "\n\n";
+
+        PlayerPosition();
+
+        debugTextLeft += "\n";
+
+        PlayerDirection();
+
+        debugTextLeft += "\n";
+
+        debugTextLeft += (
+            "lc: " + "0" + 
+            " b: " + "Eternal WindowsXP Hills" + 
+            " bl: " + "0" + 
+            " sl: " + "0" + 
+            " rl: " + "0" + 
+            "\n" +
+            
+            "ws: " + "0" + 
+            ", fs: " + "0"
+        );
+
+        PlayerIsGrounded();
+
+        debugTextLeft += (
+            ", fl: " + "0"
+        );
+
+        textLeft.text = debugTextLeft;
+    }
+
+    private void PlayerPosition() {
         Vector3 playerPos = new Vector3(
             player.position.x - 0.5f,
-            player.position.y - 0.5f - 0.6f + 1.0f,
+            player.position.y - 0.5f,
             player.position.z - 0.5f
         );
 
@@ -50,42 +92,76 @@ public class DebugScreen : MonoBehaviour {
             playerPos.z / Chunk.ChunkSizeInVoxels.z
         );
 
-        debugTextLeft = (
-            "Minecraft Clone 1.4.7 (" + frameRate + " fps, " + "0" + " chunk updates)" + "\n" +
-            "C: 0/0. F: 0, O: 0. E: 0" + "\n" +
-            "E: 0/0. B: 0, I: 0" + "\n" +
-            "P: 0. T: All: 0" + "\n" +
-            "MultiplayerChunkChache: 0" + "\n\n" +
-
-            "x: " + (playerPos.x).ToString() + 
+        debugTextLeft += (
+            // Posição x do jogador
+            "x: " + playerPos.x + 
+            // Posição x inteira do jogador
             " (" + (playerPos.x).ToString("F0") + ") // " + 
-            "c: " + (chunkPos.x).ToString("F0") + " (0)" + "\n" +
+            // Chunk que o jogador esta pisando em x
+            "c: " + (chunkPos.x).ToString("F0") + 
+            " (0)" + 
+            "\n" +
             
-            "y: " + (playerPos.y).ToString() + 
-            " (feet pos, " + (playerPos.y + 1.62f).ToString() + " eyes pos)" + "\n" +
+            // Posição y do jogador
+            "y: " + playerPos.y +  " (feet pos, " + 
+            // Posição y do jogador + altura dos olhos
+            (playerPos.y + 1.62f).ToString() + " eyes pos)" + 
+            "\n" +
             
-            "z: " + (playerPos.z).ToString() + 
+            // Posição z do jogador
+            "z: " + playerPos.z + 
+            // Posição z inteira do jogador
             " (" + (playerPos.z).ToString("F0") + ") // " + 
-            "c: " + (chunkPos.z).ToString("F0") + " (0)" + "\n" +
-            
-            "f: " + "2" + " (" + "NORTH" + ") / " + "0" + "\n" +
-            
-            "lc: " + "0" + 
-            " b: " + "Eternal WindowsXP Hills" + 
-            " bl: " + "0" + 
-            " sl: " + "0" + 
-            " rl: " + "0" + "\n" +
-            
-            "ws: " + "0" + 
-            ", fs: " + "0" + 
-            ", g: " + "false" + 
-            ", fl: " + "0"
+            // Chunk que o jogador esta pisando em z
+            "c: " + (chunkPos.z).ToString("F0") + 
+            " (0)"
         );
-
-        textLeft.text = debugTextLeft;
     }
 
-    private void TestRight() {
+    private void PlayerDirection() {
+        float aguloInclinacao = player.rotation.eulerAngles.y;
+
+        if(aguloInclinacao > 180) {
+            aguloInclinacao -= 360;
+        }
+
+        int valor = 0;
+        string direction = "SOUTH";
+
+        
+        if(aguloInclinacao > -45 || aguloInclinacao < 45) {
+            valor = 0;
+            direction = "SOUTH";
+        }
+        if(aguloInclinacao > 45 && aguloInclinacao < 135) {
+            valor = 1;
+            direction = "WEST";
+        }
+        if(aguloInclinacao > 135 || aguloInclinacao < -135) {
+            valor = 2;
+            direction = "NORTH";
+        }
+        if(aguloInclinacao > -135 && aguloInclinacao < -45) {
+            valor = 3;
+            direction = "EAST";
+        }
+        
+        debugTextLeft += (
+            // Direção cardeal que o jogador esta olhando
+            "f: " + valor + " (" + direction + ") / " + aguloInclinacao
+        );
+    }
+
+    private void PlayerIsGrounded() {
+        bool isGrounded = Movement.isGrounded;
+        
+        debugTextLeft += (
+            // Se o jogador esta pisando no chão
+            ", g: " + isGrounded.ToString().ToLower()
+        );
+    }
+
+    private void TextRight() {
         debugTextRight = (
             "Used memory: 0% (0MB) of 0MB" + "\n" +
             "Allocated momory: 0% (0MB)"

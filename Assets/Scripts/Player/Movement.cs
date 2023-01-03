@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour {
     
     private Vector3 velocity;    
     private float fallSpeed = -78.4f;
-    private bool isGrounded;
+    public static bool isGrounded;
     
     [SerializeField] private Transform groundCheck;
     private float groundDistance = 0.1f;

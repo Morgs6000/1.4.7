@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ArmorBar : MonoBehaviour {
-    // Lista de GameObjects com as sprites de coração
+    // Lista de GameObjects com as sprites de armaduras
     [SerializeField] private GameObject[] armors;
 
-    // Variável para armazenar o número de pontos de vida atuais do jogador
+    // Variável para armazenar o número de pontos de armadura atuais do jogador
     [SerializeField] private int maxArmor = 20;
     [SerializeField] private int currentArmor;
 
-    // Lista de sprites para representar os diferentes estados de cada coração
+    // Lista de sprites para representar os diferentes estados de cada armadura
     [SerializeField] private Sprite[] sprites;
 
     [SerializeField] private GameObject armorBar;
 
     private void Update() {
         // Atualiza a barra de vida do jogador baseado nos pontos de vida atuais
-        HealthBarUpdate();
+        ArmorBarUpdate();
     }
 
-    private void HealthBarUpdate() {
+    private void ArmorBarUpdate() {
         // Percorre todos os GameObjects com as sprites de coração
         for (int i = 0; i < armors.Length; i++) {
             // Se o índice atual representar um ponto de vida, ativa o GameObject e altera a sprite para um coração inteiro

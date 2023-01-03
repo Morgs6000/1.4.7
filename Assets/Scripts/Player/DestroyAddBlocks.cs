@@ -18,6 +18,8 @@ public class DestroyAddBlocks : MonoBehaviour {
     }
 
     private void Update() {
+        //currentTime = 0.25f;
+        
         DestroyBlocks();
         AddBlocks();
     }
