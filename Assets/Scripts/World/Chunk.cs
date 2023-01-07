@@ -184,7 +184,7 @@ public class Chunk : MonoBehaviour {
                     }                   
                 }
 
-                iter++;                
+                iter++;
             }
 
             int treeHeight = Random.Range(3, 5);
@@ -192,7 +192,7 @@ public class Chunk : MonoBehaviour {
             for(int i = 0; i < treeHeight; i++) {
                 if(y + i < ChunkSizeInVoxels.y) {
                     voxelMap[x, y + i, z] = VoxelType.oak_log;
-                }                
+                }
             }
         }
     }
@@ -664,6 +664,7 @@ public class Chunk : MonoBehaviour {
             UVAdd(new Vector2(5, 3));
         }
 
+        /*
         // Classic | Multiplayer Test | 0.0.19a
 
         // SPONGE
@@ -1182,5 +1183,6 @@ public class Chunk : MonoBehaviour {
         // 1.4 Pretty Scary Update | 1.4.6 | 12w49a
 
         // NETHER BRICK SLAB
+        */
     }
 }

@@ -8,7 +8,7 @@ public class Noise {
     static float heightOffset = 63.0f;
     static int seed;
     
-    public static float Perlin(float x, float z) {        
+    public static int Perlin(float x, float z) {        
         x *= frequecy;
         z *= frequecy;
         
@@ -21,7 +21,7 @@ public class Noise {
 
         y += heightOffset;
 
-        return y;
+        return (int)y;
     }
 
     public static float Perlin3D(float x, float y, float z) {
