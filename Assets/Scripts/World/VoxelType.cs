@@ -35,22 +35,22 @@ public enum VoxelType {
     glass,
 
     // Classic | Multiplayer Test | 0.0.20a
-    white_cloth,
-    light_gray_cloth,
-    dark_gray_cloth,
-    red_cloth,
-    orange_cloth,
-    yellow_cloth,
-    chartreuse_cloth,
-    green_cloth,
-    spring_green_cloth,
-    cyan_cloth,
-    capri_cloth,
-    ultramarine_cloth,
-    violet_cloth,
-    purple_cloth,
-    magenta_cloth,
-    rose_cloth,
+    //white_cloth,
+    //light_gray_cloth,
+    //dark_gray_cloth,
+    //red_cloth,
+    //orange_cloth,
+    //yellow_cloth,
+    //chartreuse_cloth,
+    //green_cloth,
+    //spring_green_cloth,
+    //cyan_cloth,
+    //capri_cloth,
+    //ultramarine_cloth,
+    //violet_cloth,
+    //purple_cloth,
+    //magenta_cloth,
+    //rose_cloth,
     block_of_gold,
     dandelion,
     rose,
@@ -75,10 +75,10 @@ public enum VoxelType {
     fire,
 
     // Indev | 0.31 | 20100114
-    water_spawner,
+    //water_spawner,
 
     // Indev | 0.31 | 20100122
-    lava_spawner,
+    //lava_spawner,
 
     // Indev | 0.31 | 20100124
     chest,
@@ -86,7 +86,7 @@ public enum VoxelType {
     // Indev | 0.31 | 20100128
     diamond_ore,
     block_of_diamond,
-    gear,
+    //gear,
 
     // Indev | 0.31 | 20100130
     crafting_table,

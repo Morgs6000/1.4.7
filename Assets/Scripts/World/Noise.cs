@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Noise {
-    static float maxHeight = 50;
-    static float minHeight = 63;
-    static float scale = 0.01f;
-    static float seed = 2;
+    static float frequecy = 0.01f;
+    static float amplitude = 50.0f;
+    static float heightOffset = 63.0f;
+    static int seed;
+    
+    public static float Perlin(float x, float z) {        
+        x *= frequecy;
+        z *= frequecy;
+        
+        x += seed;
+        z += seed;
+        
+        float y;
+        y = Mathf.PerlinNoise(x, z);
+        y *= amplitude;
 
-    public static int Perlin(float x, float z) {
-        float y = (Mathf.PerlinNoise((x * scale) + seed, (z * scale) + seed) * maxHeight) + minHeight;
+        y += heightOffset;
 
-        return (int)y;
-    }
-
-    public static int PerlinStone(float x, float z) {
-        float y = (Mathf.PerlinNoise((x * scale * 2) + seed, (z * scale * 2) + seed) * maxHeight - 4) + minHeight;
-
-        return (int)y;
+        return y;
     }
 
     public static float Perlin3D(float x, float y, float z) {

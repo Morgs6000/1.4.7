@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Diagnostics;
 
 public class DebugScreen : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI textLeft;
@@ -21,27 +22,19 @@ public class DebugScreen : MonoBehaviour {
     }
 
     private void Update() {
-        FrameRate();
-
         TextLeft();
         TextRight();
     }
 
-    private void FrameRate() {
-        if(timer > 1.0f) {
-            frameRate = (int)(1.0f / Time.unscaledDeltaTime);
-            timer = 0;
-        }
-        else {
-            timer += Time.deltaTime;
-        }
-    }
-
     private void TextLeft() {
-        
-
         debugTextLeft = (
-            "Minecraft Clone 1.4.7 (" + frameRate + " fps, " + "0" + " chunk updates)" + "\n" +
+            "Minecraft Clone 1.4.7 ("
+        );
+
+        FrameRate();
+        
+        debugTextLeft += (
+            ", " + "0" + " chunk updates)" + "\n" +
             "C: 0/0. F: 0, O: 0. E: 0" + "\n" +
             "E: 0/0. B: 0, I: 0" + "\n" +
             "P: 0. T: All: 0" + "\n" +
@@ -77,6 +70,20 @@ public class DebugScreen : MonoBehaviour {
         );
 
         textLeft.text = debugTextLeft;
+    }
+
+    private void FrameRate() {
+        if(timer > 1.0f) {
+            frameRate = (int)(1.0f / Time.unscaledDeltaTime);
+            timer = 0;
+        }
+        else {
+            timer += Time.deltaTime;
+        }
+
+        debugTextLeft += (
+            frameRate + " fps"
+        );
     }
 
     private void PlayerPosition() {
@@ -162,6 +169,43 @@ public class DebugScreen : MonoBehaviour {
     }
 
     private void TextRight() {
+        /*
+        // Cria um objeto PerformanceCounter para acessar o contador de desempenho "Memória total"
+        PerformanceCounter memoriaTotalCounter = new PerformanceCounter("Memory", "Total Physical Memory");
+
+        // Obtém a quantidade total de memória em bytes
+        long memoriaTotalBytes = memoriaTotalCounter.RawValue;
+
+        // Converte a quantidade de memória para megabytes
+        float memoriaTotalMB = memoriaTotalBytes / (1024.0f * 1024.0f);
+
+        //----------
+
+        // Cria um objeto PerformanceCounter para acessar o contador de desempenho "Memória disponível"
+        PerformanceCounter memoriaDisponivelCounter = new PerformanceCounter("Memory", "Available MBytes");
+
+        // Obtém a quantidade de memória disponível em megabytes
+        float memoriaDisponivelMB = memoriaDisponivelCounter.NextValue();
+
+        // Calcula a quantidade de memória em uso em megabytes
+        float memoriaUsadaMB = memoriaTotalMB - memoriaDisponivelMB;
+
+        //----------
+
+        float porcentagemMemoriaUsada = memoriaUsadaMB / memoriaTotalMB * 100.0f;
+
+        //----------
+                
+        debugTextRight = (
+            "Used memory: " + 
+            porcentagemMemoriaUsada.ToString("F2") + "% (" +
+            memoriaUsadaMB.ToString("F2") + " MB) of " + 
+            memoriaTotalMB.ToString("F2") + " MB" + 
+            "\n" +
+            "Allocated momory: 0% (0MB)"
+        );
+        */
+
         debugTextRight = (
             "Used memory: 0% (0MB) of 0MB" + "\n" +
             "Allocated momory: 0% (0MB)"

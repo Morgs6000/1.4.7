@@ -35,14 +35,89 @@ public class Chunk : MonoBehaviour {
 
         ChunkVoxelMap();
 
-        Color color;
-        ColorUtility.TryParseHtmlString("#79C05A", out color);
-        meshRenderer.material.color = color;
+        //ClearBorderVoxels();
+
+        //GenerateNewChunk();
+
+        GrassColor();
     }
 
     private void Update() {
         
     }
+
+    private void GrassColor() {
+        // Grass Block
+        // Grass
+        // Tall Grass
+        // Fern
+        // Large Fern
+        // Potted Fern
+        // Sugar Cane
+
+        // Cor referente apenas ao bioma "Forest"
+        Color color;
+        ColorUtility.TryParseHtmlString("#79C05A", out color);
+        //meshRenderer.material.color = color;
+    }
+
+    private void FoliageColor() {
+        // Oak Leaves
+        // Jungle Leaves
+        // Acacia Leaves
+        // Dark Oak Leaves
+        // Vines
+
+        // Cor referente apenas ao bioma "Forest"
+        Color color;
+        ColorUtility.TryParseHtmlString("#59AE30", out color);
+
+        //----------
+        
+        // Spruce Leaves
+        Color color0;
+        ColorUtility.TryParseHtmlString("#619961", out color0);
+
+        // Birch Leaves
+        Color color1;
+        ColorUtility.TryParseHtmlString("#80A755", out color1);
+    }
+
+    /*
+    private void GenerateNewChunk() {
+        // Código para gerar a nova chunk...
+
+        // Atualiza todas as chunks existentes
+        foreach(Chunk chunk in chunkData) {
+            chunk.ChunkRenderer();
+        }
+    }
+    */
+
+    /*
+    private void ClearBorderVoxels() {
+        for(int x = 0; x < ChunkSizeInVoxels.x; x++) {
+            for(int y = 0; y < ChunkSizeInVoxels.y; y++) {
+                SetBlock(new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z), VoxelType.air);
+                SetBlock(new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z + ChunkSizeInVoxels.z - 1), VoxelType.air);
+            }
+        }
+
+        for(int y = 0; y < ChunkSizeInVoxels.y; y++) {
+            for(int z = 0; z < ChunkSizeInVoxels.z; z++) {
+                SetBlock(new Vector3(transform.position.x, transform.position.y + y, transform.position.z + z), VoxelType.air);
+                SetBlock(new Vector3(transform.position.x + ChunkSizeInVoxels.x - 1, transform.position.y + y, transform.position.z + z), VoxelType.air);
+            }
+        }
+
+        for(int z = 0; z < ChunkSizeInVoxels.z; z++) {
+            for(int x = 0; x < ChunkSizeInVoxels.x; x++) {
+                SetBlock(new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z), VoxelType.air);
+                SetBlock(new Vector3(transform.position.x + x, transform.position.y + ChunkSizeInVoxels.y - 1, transform.position.z + z), VoxelType.air);
+            }
+        }
+    }
+    */
 
     public void SetBlock(Vector3 worldPos, VoxelType b) {
         Vector3 localPos = worldPos - transform.position;
@@ -284,10 +359,11 @@ public class Chunk : MonoBehaviour {
         int y = (int)offset.y;
         int z = (int)offset.z;
 
+        //*
         if(
-            x < 0 || x >= ChunkSizeInVoxels.x ||
-            y < 0 || y >= ChunkSizeInVoxels.y ||
-            z < 0 || z >= ChunkSizeInVoxels.z
+            x < 0 || x > ChunkSizeInVoxels.x - 1 ||
+            y < 0 || y > ChunkSizeInVoxels.y - 1 ||
+            z < 0 || z > ChunkSizeInVoxels.z - 1
         ) {
             return false;
         }
@@ -295,6 +371,93 @@ public class Chunk : MonoBehaviour {
             return false;
         }
 
+        //return true;
+        //*/
+
+        //----------
+
+        /*
+        // Verifica se o índice x está fora dos limites da chunk
+        if(x < 0 || x >= ChunkSizeInVoxels.x - 1) {
+            return false;
+        }
+
+        // Verifica se o índice y está fora dos limites da chunk
+        if(y < 0 || y >= ChunkSizeInVoxels.y - 1) {
+            return false;
+        }
+
+        // Verifica se o índice z está fora dos limites da chunk
+        if(z < 0 || z >= ChunkSizeInVoxels.z - 1) {
+            return false;
+        }
+        */
+
+        /*
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "right" (lado direito)
+        if(x < ChunkSizeInVoxels.x - 1 && voxelMap[x + 1, y, z] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "left" (lado esquerdo)
+        if(x > 0 && voxelMap[x - 1, y, z] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "top" (parte de cima)
+        if(y < ChunkSizeInVoxels.y - 1 && voxelMap[x, y + 1, z] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "bottom" (parte de baixo)
+        if(y > 0 && voxelMap[x, y - 1, z] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "front" (parte da frente)
+        if(z < ChunkSizeInVoxels.z - 1 && voxelMap[x, y, z + 1] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "back" (parte de trás)
+        if(z > 0 && voxelMap[x, y, z - 1] != VoxelType.air) {
+            return true;
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "right" que pertence a outra chunk
+        if(x == ChunkSizeInVoxels.x - 1) {
+            Chunk rightChunk = GetChunk(new Vector3(transform.position.x + ChunkSizeInVoxels.x, transform.position.y, transform.position.z));
+            if(rightChunk.voxelMap[0, y, z] != VoxelType.air) {
+                return true;
+            }
+        }
+        
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "left" que pertence a outra chunk
+        if(x == 0) {
+            Chunk leftChunk = GetChunk(new Vector3(transform.position.x - ChunkSizeInVoxels.x, transform.position.y, transform.position.z));
+            if(leftChunk.voxelMap[(int)ChunkSizeInVoxels.z - 1, y, z] != VoxelType.air) {
+                return true;
+            }
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "front" que pertence a outra chunk
+        if(z == ChunkSizeInVoxels.z - 1) {
+            Chunk frontChunk = GetChunk(new Vector3(transform.position.x, transform.position.y, transform.position.z + ChunkSizeInVoxels.z));
+            if(frontChunk.voxelMap[x, y, 0] != VoxelType.air) {
+                return true;
+            }
+        }
+
+        // Verifica se o voxel (x, y, z) tem um vizinho sólido na direção "back" que pertence a outra chunk
+        if(z == 0) {
+            Chunk backChunk = GetChunk(new Vector3(transform.position.x, transform.position.y, transform.position.z - ChunkSizeInVoxels.z));
+            if(backChunk.voxelMap[x, y, (int)ChunkSizeInVoxels.z - 1] != VoxelType.air) {
+                return true;
+            }
+        }
+        //*/
+
+        //return false;
         return true;
     }
 
@@ -365,8 +528,8 @@ public class Chunk : MonoBehaviour {
 
     private void UVAdd(Vector2 textureCoordinate) {
         Vector2 offset = new Vector2(
-            0, 
-            0
+            1, 
+            1
         );
 
         Vector2 textureSizeInTiles = new Vector2(
@@ -504,7 +667,14 @@ public class Chunk : MonoBehaviour {
         // Classic | Multiplayer Test | 0.0.19a
 
         // SPONGE
+        if(voxelType == VoxelType.sponge) {
+            UVAdd(new Vector2(0, 3));
+        }
+
         // GLASS
+        if(voxelType == VoxelType.glass) {
+            UVAdd(new Vector2(1, 3));
+        }
 
         // Classic | Multiplayer Test | 0.0.20a
 
@@ -524,28 +694,103 @@ public class Chunk : MonoBehaviour {
         // PURPLE CLOTH
         // MAGENTA CLOTH
         // ROSE CLOTH
+
         // BLOCK OF GOLD
+        if(voxelType == VoxelType.block_of_gold) {
+            UVAdd(new Vector2(7, 1));
+        }
+
         // DANDELION
+        if(voxelType == VoxelType.dandelion) {
+            UVAdd(new Vector2(13, 0));
+        }
+
         // ROSE
+        if(voxelType == VoxelType.rose) {
+            UVAdd(new Vector2(12, 0));
+        }
+
         // RED MUSHROOM
+        if(voxelType == VoxelType.red_mushroom) {
+            UVAdd(new Vector2(12, 1));
+        }
+
         // BROWN MUSHROOM
+        if(voxelType == VoxelType.brown_mushroom) {
+            UVAdd(new Vector2(13, 1));
+        }
 
         // Classic | Survival Test | 0.26 SURVIVAL TEST
 
-        // SMOOTH STONE SLAB
+        // SMOOTH STONE SLAB        
+        if(voxelType == VoxelType.smooth_stone_slab) {
+            if(
+                side == VoxelSide.TOP || 
+                side == VoxelSide.BOTTOM
+            ) {
+                UVAdd(new Vector2(6, 0));
+                return;
+            }
+
+            UVAdd(new Vector2(5, 0));
+        }
+
         // BLOCK OF IRON
+        if(voxelType == VoxelType.block_of_iron) {
+            UVAdd(new Vector2(6, 1));
+        }
+
         // TNT
+        if(voxelType == VoxelType.tnt) {
+            if(side == VoxelSide.TOP) {
+                UVAdd(new Vector2(9, 0));
+                return;
+            }
+            if(side == VoxelSide.BOTTOM) {
+                UVAdd(new Vector2(10, 0));
+                return;
+            }
+
+            UVAdd(new Vector2(8, 0));
+        }
+
+
         // MOSSY COBBLESTONE
+        if(voxelType == VoxelType.mossy_cobblestone) {
+            UVAdd(new Vector2(4, 2));
+        }
+
         // BRICKS
+        if(voxelType == VoxelType.bricks) {
+            UVAdd(new Vector2(7, 0));
+        }
+
         // BOOKSHELF
+        if(voxelType == VoxelType.bookshelf) {
+            if(
+                side == VoxelSide.TOP || 
+                side == VoxelSide.BOTTOM
+            ) {
+                UVAdd(new Vector2(4, 0));
+                return;
+            }
+
+            UVAdd(new Vector2(3, 2));
+        }
 
         // Classic | Late Classic | 0.28
 
         // OBSIDIAN
+        if(voxelType == VoxelType.obsidian) {
+            UVAdd(new Vector2(5, 2));
+        }
 
         // Indev | 0.31 | 20091223-2
 
         // TORCHE
+        if(voxelType == VoxelType.torche) {
+            UVAdd(new Vector2(0, 5));
+        }
 
         // Indev | 0.31 | 20100109
 
@@ -566,31 +811,97 @@ public class Chunk : MonoBehaviour {
         // Indev | 0.31 | 20100128
 
         // DIAMOND ORE
+        if(voxelType == VoxelType.diamond_ore) {
+            UVAdd(new Vector2(2, 3));
+        }
+
         // BLOCK OF DIAMOND
+        if(voxelType == VoxelType.block_of_diamond) {
+            UVAdd(new Vector2(8, 1));
+        }
+
         // GEAR
 
         // Indev | 0.31 | 20100130
 
         // CRAFTING TABLE
+        if(voxelType == VoxelType.crafting_table) {
+            if(side == VoxelSide.TOP) {
+                UVAdd(new Vector2(11, 2));
+                return;
+            }
+            if(side == VoxelSide.BOTTOM) {
+                UVAdd(new Vector2(4, 0));
+                return;
+            }
+            if(
+                side == VoxelSide.FRONT ||
+                side == VoxelSide.BACK 
+            ) {
+                UVAdd(new Vector2(11, 3));
+                return;
+            }
+            if(
+                side == VoxelSide.RIGHT ||
+                side == VoxelSide.LEFT 
+            ) {
+                UVAdd(new Vector2(12, 3));
+                return;
+            }
+        }
 
         // Indev | 20100206
 
         // FARMLAND
+        if(voxelType == VoxelType.farmland) {
+            if(side == VoxelSide.TOP) {
+                UVAdd(new Vector2(7, 5));
+                return;
+            }
+
+            UVAdd(new Vector2(2, 0));
+        }
+
         // WHEAT CROP
+        if(voxelType == VoxelType.wheat_crop) {
+            UVAdd(new Vector2(15, 5));
+        }
 
         // Indev | 20100219
 
         // FURNACE
+        if(voxelType == VoxelType.furnace) {
+            if(
+                side == VoxelSide.TOP || 
+                side == VoxelSide.BOTTOM
+            ) {
+                UVAdd(new Vector2(0, 1));
+                return;
+            }
+            if(side == VoxelSide.FRONT) {
+                UVAdd(new Vector2(12, 2));
+                return;
+            }
+            
+            UVAdd(new Vector2(13, 2));
+        }
 
         // Indev | 20100607
 
         // LADDER
+        if(voxelType == VoxelType.ladder) {
+            UVAdd(new Vector2(3, 5));
+        }
+
         // OAK SING
         // OAK DOOR
 
         // Infdev | 20100618 (Seecret Friday 1)
 
         // RAIL
+        if(voxelType == VoxelType.rail) {
+            UVAdd(new Vector2(0, 8));
+        }
 
         // Infdev | 20100624
             // Removidos todos os tipos de tecidos coloridos do jogo, embora o branco ainda exista.
@@ -599,6 +910,10 @@ public class Chunk : MonoBehaviour {
         // Infdev | 20100625-2 (Seecret Friday 2)
 
         // SPAWNER
+        if(voxelType == VoxelType.spawner) {
+            UVAdd(new Vector2(1, 4));
+        }
+
             // Removidos os blocos geradores de água e lava.
             // Indev | 0.31 | 20100114
             // Indev | 0.31 | 20100122
@@ -611,8 +926,20 @@ public class Chunk : MonoBehaviour {
         // Alpha | 1.0 | 1.0.1 (Seecret Friday 3)
 
         // RESSTONE ORE
+        if(voxelType == VoxelType.redstone_ore) {
+            UVAdd(new Vector2(3, 3));
+        }
+
         // REDSTONE WIRE
+        if(voxelType == VoxelType.redstone_wire) {
+            UVAdd(new Vector2(5, 10));
+        }
+
         // REDSTONE TORCHE
+        if(voxelType == VoxelType.redstone_torche) {
+            UVAdd(new Vector2(3, 6));
+        }
+
         // OAK PRESSURE PLATE
         // STONE PRESSURE PLATE
         // STONE BUTTON
