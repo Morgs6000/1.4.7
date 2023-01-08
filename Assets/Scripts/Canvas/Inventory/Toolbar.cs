@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Toolbar : MonoBehaviour {
+public class Toolbar : MonoBehaviour {    
+    [SerializeField] private MenusManager menusManager;
+    bool openMenu;
+
+    [Space(20)]
     [SerializeField] RectTransform highlight;
     [SerializeField] ItemSlot[] itemSlots;
 
     int slotIndex = 0;
-
-    bool openMenu;
     
     void Start() {
         
     }
 
     void Update() {
-        openMenu = CanvasManager.openMenu;
+        openMenu = menusManager.openMenu;
 
         if(!openMenu) {
             KeyInputs();

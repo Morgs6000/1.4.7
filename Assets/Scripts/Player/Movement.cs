@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     [SerializeField] private CharacterController characterController;
 
+    [Space(20)]
     [SerializeField] private float speed;
     private float walkingSpeed = 4.317f;
     
@@ -12,12 +13,14 @@ public class Movement : MonoBehaviour {
     private float fallSpeed = -78.4f;
     public static bool isGrounded;
     
+    [Space(20)]
     [SerializeField] private Transform groundCheck;
     private float groundDistance = 0.1f;
     [SerializeField] private LayerMask groundMask;
     
     private float jumpHeight = 1.2522f;
 
+    [Space(20)]
     [SerializeField] private bool running;
     private float sprintingSpeed = 5.612f;
 
@@ -25,7 +28,9 @@ public class Movement : MonoBehaviour {
     private const float DOUBLE_CLICK_TIME = 0.2f;
 
     //private float stepOffset = 1.0f;
-
+    
+    [Space(20)]
+    [SerializeField] private MenusManager menusManager;
     private bool openMenu;
     private bool openGameMenu;
 
@@ -34,8 +39,8 @@ public class Movement : MonoBehaviour {
     }
 
     private void Update() {
-        openMenu = CanvasManager.openMenu;
-        openGameMenu = CanvasManager.openGameMenu;
+        openMenu = menusManager.openMenu;
+        openGameMenu = menusManager.openGameMenu;
 
         if(!openMenu) {
             MovementUpdate();

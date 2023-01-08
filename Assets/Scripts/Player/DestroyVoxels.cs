@@ -9,6 +9,7 @@ public class DestroyVoxels : MonoBehaviour {
     private float rangeHit = 5.0f;
     [SerializeField] private LayerMask groundMask;
 
+    [SerializeField] private MenusManager menusManager;
     private bool openMenu;
     
     private void Start() {
@@ -16,7 +17,7 @@ public class DestroyVoxels : MonoBehaviour {
     }
 
     private void Update() {   
-        openMenu = CanvasManager.openMenu;
+        openMenu = menusManager.openMenu;
              
         if(!openMenu) {
             Destroy();

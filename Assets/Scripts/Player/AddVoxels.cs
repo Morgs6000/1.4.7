@@ -13,6 +13,7 @@ public class AddVoxels : MonoBehaviour {
 
     [SerializeField] private float currentTime;
 
+    [SerializeField] private MenusManager menusManager;
     private bool openMenu;
     
     private void Start() {
@@ -20,7 +21,7 @@ public class AddVoxels : MonoBehaviour {
     }
 
     private void Update() {
-        openMenu = CanvasManager.openMenu;
+        openMenu = menusManager.openMenu;
 
         //currentTime = 0.25f;
         

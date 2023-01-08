@@ -6,6 +6,10 @@ using TMPro;
 using System.Diagnostics;
 
 public class DebugScreen : MonoBehaviour {
+    [SerializeField] private GameObject left;
+    [SerializeField] private GameObject right;
+
+    [Space(20)]
     [SerializeField] private TextMeshProUGUI textLeft;
     [SerializeField] private TextMeshProUGUI textRight;
 
@@ -18,12 +22,22 @@ public class DebugScreen : MonoBehaviour {
     [SerializeField] private Transform player;
 
     private void Start() {
-        
+        left.SetActive(true);
+        right.SetActive(true);
     }
 
     private void Update() {
+        Menu();
+        
         TextLeft();
         TextRight();
+    }
+
+    private void Menu() {
+        if(Input.GetKeyDown(KeyCode.F3)) {
+            left.SetActive(!left.activeSelf);
+            right.SetActive(!right.activeSelf);
+        }
     }
 
     private void TextLeft() {

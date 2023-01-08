@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour {
 
     private float xRotation = 0;
 
+    [SerializeField] private MenusManager menusManager;
     private bool openMenu;
     
     private void Start() {
@@ -14,7 +15,7 @@ public class CameraControl : MonoBehaviour {
     }
 
     private void Update() {
-        openMenu = CanvasManager.openMenu;
+        openMenu = menusManager.openMenu;
         
         if(!openMenu) {
             Cursor.lockState = CursorLockMode.Locked;
