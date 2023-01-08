@@ -26,16 +26,28 @@ public class Movement : MonoBehaviour {
 
     //private float stepOffset = 1.0f;
 
+    private bool openMenu;
+    private bool openGameMenu;
+
     private void Start() {
         speed = walkingSpeed;
     }
 
     private void Update() {
-        MovementUpdate();
-        FallUpdate();
-        JumpUpdate();
+        openMenu = CanvasManager.openMenu;
+        openGameMenu = CanvasManager.openGameMenu;
+
+        if(!openMenu) {
+            MovementUpdate();
+            JumpUpdate();
+            SprintUpdate();
+        }
+        if(!openGameMenu) {
+            FallUpdate();
+        }
+        
         //StepOffsetUpdate();
-        SprintUpdate();
+        
     }
 
     private void MovementUpdate() {

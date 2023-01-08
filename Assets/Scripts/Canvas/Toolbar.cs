@@ -8,14 +8,20 @@ public class Toolbar : MonoBehaviour {
     [SerializeField] ItemSlot[] itemSlots;
 
     int slotIndex = 0;
+
+    bool openMenu;
     
     void Start() {
         
     }
 
     void Update() {
-        KeyInputs();
-        ScrollInputs();
+        openMenu = CanvasManager.openMenu;
+
+        if(!openMenu) {
+            KeyInputs();
+            ScrollInputs();
+        }
         
         highlight.position = itemSlots[slotIndex].icon.transform.position;
     }

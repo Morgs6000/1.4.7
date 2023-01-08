@@ -171,16 +171,16 @@ public class Chunk : MonoBehaviour {
 
             int iter = 0;
             
-            for(int yL = y + 0; yL < y + leavesHeight; yL++) {
-                for(int xL = x - 2 + iter / 2; xL <  x + 3 - iter / 2; xL++) {                
-                    for(int zL = z - 2 + iter / 2; zL <  z + 3 - iter / 2; zL++) {
+            for(int yL = (y + 0); yL < (y + leavesHeight); yL++) {
+                for(int xL = (x - 2 + iter / 2); xL <  (x + 3 - iter / 2); xL++) {                
+                    for(int zL = (z - 2 + iter / 2); zL < (z + 3 - iter / 2); zL++) {
                         if(
                             xL >= 0 && xL < ChunkSizeInVoxels.x &&
                             yL >= 0 && yL < ChunkSizeInVoxels.y &&
                             zL >= 0 && zL < ChunkSizeInVoxels.z
                         ) {
                             voxelMap[xL, yL + 3, zL] = VoxelType.oak_leaves;
-                        } 
+                        }
                     }                   
                 }
 

@@ -12,12 +12,18 @@ public class ExperienceBar : MonoBehaviour {
 
     [SerializeField] private float contador;
     
-    void Start() {
+    private bool openGameMenu;
+    
+    private void Start() {
         
     }
 
-    void Update() {
-        ExperienceBarUpdate();
+    private void Update() {
+        openGameMenu = CanvasManager.openGameMenu;
+
+        if(!openGameMenu) {
+            ExperienceBarUpdate();
+        }
     }
 
     private void ExperienceBarUpdate() {
