@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Scriptable Object/Item", order = 30)]
+[CreateAssetMenu(menuName = "Scriptable object/Item")]
 public class Item : ScriptableObject {
-    public Sprite sprite;
-
-    public int maxStack;
+    
 }

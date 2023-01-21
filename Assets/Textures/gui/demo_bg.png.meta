@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 95060b33c4990a24e8012a87fccfc7d4
+guid: 24457916daf53584e8aedfc41977e60a
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 5171582715781081684
-    second: demo_bg_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -93,32 +90,11 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: demo_bg_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 90
-        width: 248
-        height: 166
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 4, w: 4}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45a6eac641725c740800000000000000
-      internalID: 5171582715781081684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 025a748de44711f41af4abde15d3e968
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 

@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Toolbar : MonoBehaviour {    
-    [SerializeField] private MenusManager menusManager;
-    bool openMenu;
-
+    [SerializeField] private InterfaceManager interfaceManager;
+    private bool openMenu;
+    private bool openGameMenu;
+    
     [Space(20)]
     [SerializeField] RectTransform highlight;
     [SerializeField] ItemSlot[] itemSlots;
@@ -18,9 +19,10 @@ public class Toolbar : MonoBehaviour {
     }
 
     void Update() {
-        openMenu = menusManager.openMenu;
+        openMenu = interfaceManager.openMenu;
+        openGameMenu = interfaceManager.openGameMenu;
 
-        if(!openMenu) {
+        if(!openGameMenu && !openMenu) {
             KeyInputs();
             ScrollInputs();
         }

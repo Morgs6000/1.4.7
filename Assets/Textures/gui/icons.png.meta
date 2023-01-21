@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f80570e37f387484f9009c33c98a9e83
+guid: 0436cb44a35915646a8ea1b52ff16cec
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -1290855366162983238
     second: icons_2
+  - first:
+      213: -2248273014285675650
+    second: icons_3
   - first:
       213: -2696506250795634678
     second: icons_4
@@ -155,10 +158,10 @@ TextureImporter:
       name: icons_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 187
-        width: 182
-        height: 5
+        x: 16
+        y: 247
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +179,10 @@ TextureImporter:
       name: icons_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 182
-        width: 182
-        height: 5
+        x: 52
+        y: 247
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,7 +200,7 @@ TextureImporter:
       name: icons_3
       rect:
         serializedVersion: 2
-        x: 16
+        x: 61
         y: 247
         width: 9
         height: 9
@@ -218,12 +221,12 @@ TextureImporter:
       name: icons_4
       rect:
         serializedVersion: 2
-        x: 52
-        y: 247
+        x: 16
+        y: 220
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +242,12 @@ TextureImporter:
       name: icons_5
       rect:
         serializedVersion: 2
-        x: 61
-        y: 247
+        x: 52
+        y: 220
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +263,12 @@ TextureImporter:
       name: icons_6
       rect:
         serializedVersion: 2
-        x: 16
+        x: 61
         y: 220
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,12 +284,12 @@ TextureImporter:
       name: icons_7
       rect:
         serializedVersion: 2
-        x: 52
-        y: 220
+        x: 16
+        y: 238
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,12 +305,12 @@ TextureImporter:
       name: icons_8
       rect:
         serializedVersion: 2
-        x: 61
-        y: 220
+        x: 34
+        y: 238
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,12 +326,12 @@ TextureImporter:
       name: icons_9
       rect:
         serializedVersion: 2
-        x: 16
+        x: 25
         y: 238
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -344,12 +347,12 @@ TextureImporter:
       name: icons_10
       rect:
         serializedVersion: 2
-        x: 34
-        y: 238
+        x: 16
+        y: 229
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -366,11 +369,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 25
-        y: 238
+        y: 229
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,10 +389,10 @@ TextureImporter:
       name: icons_12
       rect:
         serializedVersion: 2
-        x: 16
-        y: 229
-        width: 9
-        height: 9
+        x: 0
+        y: 187
+        width: 182
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +410,10 @@ TextureImporter:
       name: icons_13
       rect:
         serializedVersion: 2
-        x: 25
-        y: 229
-        width: 9
-        height: 9
+        x: 0
+        y: 182
+        width: 182
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,7 +430,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5a366e19f3273de4280c28c9a90226cf
+    spriteID: 9aa5511376aa9784eb4d56652245dc2e
     internalID: 0
     vertices: []
     indices: 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform cam;
+    private float xRotation = 0;
 
     [Space(20)]
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private float speed;
     private float walkingSpeed = 4.317f;
     
@@ -27,32 +29,50 @@ public class Movement : MonoBehaviour {
     private float lastClickTime;
     private const float DOUBLE_CLICK_TIME = 0.2f;
 
-    //private float stepOffset = 1.0f;
-    
-    [Space(20)]
-    [SerializeField] private MenusManager menusManager;
+    [SerializeField] private InterfaceManager interfaceManager;
     private bool openMenu;
     private bool openGameMenu;
+
+    //private float stepOffset = 1.0f;
 
     private void Start() {
         speed = walkingSpeed;
     }
 
     private void Update() {
-        openMenu = menusManager.openMenu;
-        openGameMenu = menusManager.openGameMenu;
+        openMenu = interfaceManager.openMenu;
+        openGameMenu = interfaceManager.openGameMenu;
 
-        if(!openMenu) {
-            MovementUpdate();
-            JumpUpdate();
-            SprintUpdate();
-        }
-        if(!openGameMenu) {
+        if(!openGameMenu) {    
+            if(!openMenu) {
+                Cursor.lockState = CursorLockMode.Locked;
+
+                CameraUpdate();
+            
+                MovementUpdate();
+                JumpUpdate();
+                SprintUpdate();
+            }    
+
             FallUpdate();
+        }
+        else {
+            Cursor.lockState = CursorLockMode.None;
         }
         
         //StepOffsetUpdate();
-        
+    }
+
+    private void CameraUpdate() {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        transform.Rotate(Vector3.up * mouseX);
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90, 90);
+
+        cam.localRotation = Quaternion.Euler(xRotation, 0, 0);
     }
 
     private void MovementUpdate() {
@@ -87,21 +107,6 @@ public class Movement : MonoBehaviour {
         }
     }
 
-    /*
-    private void StepOffsetUpdate() {
-        RaycastHit hit;
-
-        
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, stepOffset)) {
-            Vector3 newPosition = hit.point + Vector3.up * stepOffset;
-            characterController.Move(newPosition - transform.position);
-        }
-        else {
-            characterController.Move(moveDirection * Time.deltaTime);
-        }
-    }
-    */
-
     private void SprintUpdate() {
         if(running == false) {
             speed = walkingSpeed;
@@ -134,4 +139,19 @@ public class Movement : MonoBehaviour {
             running = false;
         }
     }
+
+    /*
+    private void StepOffsetUpdate() {
+        RaycastHit hit;
+
+        
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, stepOffset)) {
+            Vector3 newPosition = hit.point + Vector3.up * stepOffset;
+            characterController.Move(newPosition - transform.position);
+        }
+        else {
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
+    }
+    */
 }

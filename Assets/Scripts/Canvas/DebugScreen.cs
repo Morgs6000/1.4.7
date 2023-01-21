@@ -6,10 +6,6 @@ using TMPro;
 using System.Diagnostics;
 
 public class DebugScreen : MonoBehaviour {
-    [SerializeField] private GameObject left;
-    [SerializeField] private GameObject right;
-
-    [Space(20)]
     [SerializeField] private TextMeshProUGUI textLeft;
     [SerializeField] private TextMeshProUGUI textRight;
 
@@ -22,22 +18,12 @@ public class DebugScreen : MonoBehaviour {
     [SerializeField] private Transform player;
 
     private void Start() {
-        left.SetActive(true);
-        right.SetActive(true);
+        
     }
 
     private void Update() {
-        Menu();
-        
         TextLeft();
         TextRight();
-    }
-
-    private void Menu() {
-        if(Input.GetKeyDown(KeyCode.F3)) {
-            left.SetActive(!left.activeSelf);
-            right.SetActive(!right.activeSelf);
-        }
     }
 
     private void TextLeft() {
@@ -149,7 +135,6 @@ public class DebugScreen : MonoBehaviour {
         int valor = 0;
         string direction = "SOUTH";
 
-        
         if(aguloInclinacao > -45 || aguloInclinacao < 45) {
             valor = 0;
             direction = "SOUTH";
@@ -166,6 +151,20 @@ public class DebugScreen : MonoBehaviour {
             valor = 3;
             direction = "EAST";
         }
+
+        //  -45 ||   45 = NORTH
+        //   45 ||  135 = EAST
+        //  135 || -135 = SOUTH
+        // -135 ||  -45 = WEST
+
+        //  -22.5 ||   22.5 = NORTH
+        //   22.5 ||   67.5 = NORTHEAST
+        //   67.5 ||  112.5 = EAST
+        //  112.5 ||  157.5 = SOUTHEAST
+        //  157.5 || -157.5 = SOUTH
+        // -157.5 || -112.5 = SOUTHWEST
+        // -112.5 ||  -67.5 = WEST
+        //  -67.5 ||  -22.5 = NORTHWEST
         
         debugTextLeft += (
             // Direção cardeal que o jogador esta olhando
