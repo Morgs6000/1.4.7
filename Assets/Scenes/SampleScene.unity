@@ -8840,7 +8840,6 @@ MonoBehaviour:
   loadBar: {fileID: 2030429960}
   loadPercent: {fileID: 1211308165}
   chunkPrefab: {fileID: 4397068632317611643, guid: 7259255ae4839b142bcf6dd52e45bb77, type: 3}
-  Chunk: {fileID: 0}
   player: {fileID: 674549334}
 --- !u!4 &1544770769
 Transform:

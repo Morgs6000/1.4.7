@@ -9,11 +9,15 @@ public class Chunk : MonoBehaviour {
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
-    private List<Vector3> vertices = new List<Vector3>();
+    private List<Vector3> vertices = new List<Vector3>();    
     private enum VoxelSide { RIGHT, LEFT, TOP, BOTTOM, FRONT, BACK }
 
     private List<int> triangles = new List<int>();
     private int vertexIndex;
+
+    private List<Vector3> verticesCollider = new List<Vector3>();
+    private List<int> trianglesCollider = new List<int>();
+    private int vertexIndexCollider;
 
     private List<Vector2> uv = new List<Vector2>();
 
@@ -181,11 +185,17 @@ public class Chunk : MonoBehaviour {
 
         vertexIndex = 0;
 
+        verticesCollider.Clear();
+        trianglesCollider.Clear();
+
+        vertexIndexCollider = 0;
+
         for(int x = 0; x < ChunkSizeInVoxels.x; x++) {
             for(int y = 0; y < ChunkSizeInVoxels.y; y++) {
                 for(int z = 0; z < ChunkSizeInVoxels.z; z++) {
                     if(voxelMap[x, y, z] != 0) {
                         VoxelGen(new Vector3(x, y, z));
+                        VoxelColliderGen(new Vector3(x, y, z));
                     }
                 }
             }
@@ -212,8 +222,8 @@ public class Chunk : MonoBehaviour {
         Mesh voxelMeshCollider = new Mesh();
         voxelMeshCollider.name = "Chunk Collider";
 
-        voxelMeshCollider.vertices = vertices.ToArray();
-        voxelMeshCollider.triangles = triangles.ToArray();
+        voxelMeshCollider.vertices = verticesCollider.ToArray();
+        voxelMeshCollider.triangles = trianglesCollider.ToArray();
 
         meshCollider.sharedMesh = voxelMeshCollider;
     }
@@ -406,5 +416,77 @@ public class Chunk : MonoBehaviour {
             //UVAdd(new Vector2(4, 3));
             UVAdd(new Vector2(5, 3));
         }
+    }
+
+    private void VoxelColliderGen(Vector3 offset) {
+        VerticesColliderAdd(VoxelSide.RIGHT, offset);
+        VerticesColliderAdd(VoxelSide.LEFT, offset);
+        VerticesColliderAdd(VoxelSide.TOP, offset);
+        VerticesColliderAdd(VoxelSide.BOTTOM, offset);
+        VerticesColliderAdd(VoxelSide.FRONT, offset);
+        VerticesColliderAdd(VoxelSide.BACK, offset);
+    }
+
+    private void VerticesColliderAdd(VoxelSide side, Vector3 offset) {
+        switch(side) {
+            case VoxelSide.RIGHT: {
+                verticesCollider.Add(new Vector3(1, 0, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(1, 0, 1) + offset);
+                break;
+            }
+            case VoxelSide.LEFT: {
+                verticesCollider.Add(new Vector3(0, 0, 1) + offset);
+                verticesCollider.Add(new Vector3(0, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(0, 1, 0) + offset);
+                verticesCollider.Add(new Vector3(0, 0, 0) + offset);
+                break;
+            }
+            case VoxelSide.TOP: {
+                verticesCollider.Add(new Vector3(0, 1, 0) + offset);
+                verticesCollider.Add(new Vector3(0, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 0) + offset);
+                break;
+            }
+            case VoxelSide.BOTTOM: {
+                verticesCollider.Add(new Vector3(0, 0, 1) + offset);
+                verticesCollider.Add(new Vector3(0, 0, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 0, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 0, 1) + offset);
+                break;
+            }
+            case VoxelSide.FRONT: {
+                verticesCollider.Add(new Vector3(1, 0, 1) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(0, 1, 1) + offset);
+                verticesCollider.Add(new Vector3(0, 0, 1) + offset);
+                break;
+            }
+            case VoxelSide.BACK: {
+                verticesCollider.Add(new Vector3(0, 0, 0) + offset);
+                verticesCollider.Add(new Vector3(0, 1, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 1, 0) + offset);
+                verticesCollider.Add(new Vector3(1, 0, 0) + offset);
+                break;
+            }
+        }
+
+        TrianglesColliderAdd();
+    }
+
+    private void TrianglesColliderAdd() {
+        // Primeiro Tiangulo
+        trianglesCollider.Add(0 + vertexIndexCollider);
+        trianglesCollider.Add(1 + vertexIndexCollider);
+        trianglesCollider.Add(2 + vertexIndexCollider);
+
+        // Segundo Triangulo
+        trianglesCollider.Add(0 + vertexIndexCollider);
+        trianglesCollider.Add(2 + vertexIndexCollider);
+        trianglesCollider.Add(3 + vertexIndexCollider);
+
+        vertexIndexCollider += 4;
     }
 }
