@@ -46,13 +46,33 @@ public class Chunk : MonoBehaviour {
     public void SetBlock(Vector3 worldPos, VoxelType voxelType) {
         Vector3 localPos = worldPos - transform.position;
 
-        voxelMap[
-            Mathf.FloorToInt(localPos.x), 
-            Mathf.FloorToInt(localPos.y), 
-            Mathf.FloorToInt(localPos.z)
-        ] = voxelType;
+        int x = Mathf.FloorToInt(localPos.x);
+        int y = Mathf.FloorToInt(localPos.y);
+        int z = Mathf.FloorToInt(localPos.z);
+
+        voxelMap[x, y, z] = voxelType;
 
         ChunkGen();
+    }
+
+    public VoxelType GetBlock(Vector3 worldPos) {
+        Vector3 localPos = worldPos - transform.position;
+
+        int x = Mathf.FloorToInt(localPos.x);
+        int y = Mathf.FloorToInt(localPos.y);
+        int z = Mathf.FloorToInt(localPos.z);
+
+        if(
+            x < 0 || x >= ChunkSizeInVoxels.x ||
+            y < 0 || y >= ChunkSizeInVoxels.y ||
+            z < 0 || z >= ChunkSizeInVoxels.z
+        ) {
+            Debug.LogError("Coordinates out of range");
+
+            return default(VoxelType);
+        }
+
+        return voxelMap[x, y, z];
     }
 
     public static Chunk GetChunk(Vector3 pos) {        

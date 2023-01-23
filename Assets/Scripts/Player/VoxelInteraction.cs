@@ -49,6 +49,8 @@ public class VoxelInteraction : MonoBehaviour {
                 Mathf.FloorToInt(pointPos.z)
             ));
 
+            Debug.Log("Voxel type destroyed: " + c.GetBlock(pointPos).ToString());
+
             c.SetBlock(pointPos, VoxelType.air);
         }
     }
