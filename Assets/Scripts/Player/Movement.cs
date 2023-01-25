@@ -33,8 +33,6 @@ public class Movement : MonoBehaviour {
     private bool openMenu;
     private bool openGameMenu;
 
-    //private float stepOffset = 1.0f;
-
     private void Start() {
         speed = walkingSpeed;
     }
@@ -60,7 +58,7 @@ public class Movement : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
         }
         
-        //StepOffsetUpdate();
+        StepOffsetUpdate();
     }
 
     private void CameraUpdate() {
@@ -140,18 +138,33 @@ public class Movement : MonoBehaviour {
         }
     }
 
-    /*
     private void StepOffsetUpdate() {
+        // Ponto de origem do raio
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
+
+        // Direção do raio
+        Vector3 rayDirection = transform.TransformDirection(Vector3.forward);
+
+        // Distância máxima do raio
+        float maxDistance = 0.5f;
+
         RaycastHit hit;
 
-        
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, stepOffset)) {
-            Vector3 newPosition = hit.point + Vector3.up * stepOffset;
-            characterController.Move(newPosition - transform.position);
-        }
-        else {
-            characterController.Move(moveDirection * Time.deltaTime);
+        if(isGrounded) {
+            // Verifica se o raio colide com alguma parede de voxel
+            if(Physics.Raycast(rayOrigin, rayDirection, out hit, maxDistance, groundMask)) {
+                Vector3 rayOriginUp = transform.position + Vector3.up * 1.1f;
+                Vector3 rayDirectionUp = transform.TransformDirection(Vector3.forward);
+                float maxDistanceUp = 0.5f;
+
+                if (Physics.Raycast(rayOriginUp, rayDirectionUp, maxDistanceUp, groundMask)) {
+                    return;
+                }
+                else {
+                    // Se colidir, ajusta a posição do personagem para ficar no topo do voxel
+                    transform.position = hit.point + Vector3.up * (characterController.height / 2);
+                }
+            }
         }
     }
-    */
 }
