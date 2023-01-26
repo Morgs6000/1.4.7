@@ -53,12 +53,12 @@ public class Movement : MonoBehaviour {
             }    
 
             FallUpdate();
+
+            StepOffsetUpdate();
         }
         else {
             Cursor.lockState = CursorLockMode.None;
         }
-        
-        StepOffsetUpdate();
     }
 
     private void CameraUpdate() {
@@ -148,16 +148,18 @@ public class Movement : MonoBehaviour {
         // Distância máxima do raio
         float maxDistance = 0.5f;
 
+        // Tamanho da caixa
+        Vector3 boxSize = new Vector3(0.5f, 0.5f, 0.5f);
+
         RaycastHit hit;
 
         if(isGrounded) {
+            //*
             // Verifica se o raio colide com alguma parede de voxel
             if(Physics.Raycast(rayOrigin, rayDirection, out hit, maxDistance, groundMask)) {
                 Vector3 rayOriginUp = transform.position + Vector3.up * 1.1f;
-                Vector3 rayDirectionUp = transform.TransformDirection(Vector3.forward);
-                float maxDistanceUp = 0.5f;
 
-                if (Physics.Raycast(rayOriginUp, rayDirectionUp, maxDistanceUp, groundMask)) {
+                if (Physics.Raycast(rayOriginUp, rayDirection, maxDistance, groundMask)) {
                     return;
                 }
                 else {
@@ -165,6 +167,31 @@ public class Movement : MonoBehaviour {
                     transform.position = hit.point + Vector3.up * (characterController.height / 2);
                 }
             }
+            //*/
+
+            /*
+            // Verifica se o raio colide com alguma parede de voxel
+            if(Physics.BoxCast(rayOrigin, boxSize, rayDirection, out hit, Quaternion.identity, maxDistance, groundMask)) {
+                Vector3 rayOriginUp = transform.position + Vector3.up * 1.1f;
+
+                if (Physics.BoxCast(rayOriginUp, boxSize, rayDirection, Quaternion.identity, maxDistance, groundMask)) {
+                    return;
+                }
+                else {
+                    // Se colidir, ajusta a posição do personagem para ficar no topo do voxel
+                    transform.position = hit.point + Vector3.up * (characterController.height / 2);
+                }
+            }
+            //*/
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Pig"))
+        {
+            // Aplique a força no objeto com o qual o jogador está colidindo
+            hit.gameObject.GetComponent<CharacterController>().Move(transform.forward * 10 * Time.deltaTime);
         }
     }
 }

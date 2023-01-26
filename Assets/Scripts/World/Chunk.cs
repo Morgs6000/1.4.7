@@ -280,7 +280,6 @@ public class Chunk : MonoBehaviour {
         int y = (int)offset.y;
         int z = (int)offset.z;
 
-        //*
         if(
             x < 0 || x > ChunkSizeInVoxels.x - 1 ||
             y < 0 || y > ChunkSizeInVoxels.y - 1 ||
