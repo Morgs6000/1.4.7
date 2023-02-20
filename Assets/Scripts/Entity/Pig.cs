@@ -17,17 +17,20 @@ public class Pig : MonoBehaviour {
     [SerializeField] private LayerMask groundMask;
     
     void Start() {
+        speed = walkingSpeed;
+
+        StartCoroutine(MovementUpdate());
     }
 
     void Update() {
-        MovementUpdate();
+        //MovementUpdate();
 
         FallUpdate();
         
         StepOffsetUpdate();
     }
 
-    private void MovementUpdate() {                
+    private IEnumerator MovementUpdate() {                
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
 
@@ -35,7 +38,11 @@ public class Pig : MonoBehaviour {
 
         moveDirection *= speed;
         
-        characterController.Move(moveDirection * Time.deltaTime);
+        while(true) {
+            characterController.Move(moveDirection * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
     private void FallUpdate() {
